@@ -2,6 +2,19 @@ version: '2.2'
 
 services:
 
+
+  nginx:
+    image: quay.io/dtan4/nginx-basic-auth-proxy:latest
+    ports:
+      - 8085:80
+      - 8090:8090
+    environment:
+      - BASIC_AUTH_USERNAME=kibana
+      - BASIC_AUTH_PASSWORD=password
+      - PROXY_PASS=http://kibana:5601
+    networks:
+      - eak
+
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.8.0
     environment:
