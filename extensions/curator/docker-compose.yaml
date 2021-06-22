@@ -1,3 +1,24 @@
+# version: '3.2'
+
+# services:
+#   curator:
+#     build:
+#       context: .
+#     environment:
+#       ELASTICSEARCH_HOST: elasticsearch
+#       CRON: 0 0 * * *
+#       CONFIG_FILE: /usr/share/curator/config/curator.yml
+#       COMMAND: /usr/share/curator/config/delete_log_files_curator.yml
+#       UNIT_COUNT: 2
+#     networks:
+#       - eak
+# networks:
+  
+#   eak:
+#     external: 
+#       name: eak_eak
+
+
 version: '3.2'
 
 services:
@@ -6,10 +27,20 @@ services:
       context: .
     environment:
       ELASTICSEARCH_HOST: elasticsearch
-      CRON: 0 0 * * *
-      CONFIG_FILE: /usr/share/curator/config/curator.yml
-      COMMAND: /usr/share/curator/config/delete_log_files_curator.yml
-      UNIT_COUNT: 2
+    #   CRON: 0 0 * * *
+    #   UNIT_COUNT: 2
+
+    init: true
+    volumes:
+      - type: bind
+        source: ./config/curator.yml
+        target: /usr/share/curator/config/curator.yml
+        read_only: true
+      - type: bind
+        source: ./config/delete_log_files_curator.yml
+        target: /usr/share/curator/config/delete_log_files_curator.yml
+        read_only: true
+
     networks:
       - eak
 networks:
