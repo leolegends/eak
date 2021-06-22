@@ -1,4 +1,4 @@
-version: '2.2'
+version: '3.3'
 
 services:
 
@@ -9,8 +9,8 @@ services:
       - 8085:80
       - 8090:8090
     environment:
-      - BASIC_AUTH_USERNAME=kibana
-      - BASIC_AUTH_PASSWORD=password
+      - BASIC_AUTH_USERNAME=omnilink
+      - BASIC_AUTH_PASSWORD=omnilink2021
       - PROXY_PASS=http://kibana:5601
     networks:
       - eak
@@ -62,9 +62,9 @@ services:
       interval: 10s
       timeout: 5s
       retries: 1
-    depends_on:
-      elasticsearch:
-        condition: service_healthy
+      #  depends_on:
+      # elasticsearch:
+      # condition: service_healthy
     networks:
       - eak
         
@@ -84,11 +84,11 @@ services:
     #   - setup.kibana.host="kibana:5601"
     #   - setup.template.enabled=true
     #   - logging.to_files=false
-    depends_on:
-      elasticsearch:
-        condition: service_healthy
-      kibana:
-        condition: service_healthy
+    # depends_on:
+    # elasticsearch:
+    #   condition: service_healthy
+    #  kibana:
+    #    condition: service_healthy
     networks:
       - eak
 

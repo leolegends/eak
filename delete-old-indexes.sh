@@ -1,5 +1,5 @@
 host=${eshost:-localhost}
-port=${esport:-9200}
+port=${esport:-8200}
 days=${esmaxdays:-15}
 prefix=${esindexprefix:-apm}
 
